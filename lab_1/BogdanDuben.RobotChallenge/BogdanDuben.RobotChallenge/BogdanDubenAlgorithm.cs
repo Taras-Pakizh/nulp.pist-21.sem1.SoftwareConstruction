@@ -4,22 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Robot.Common;
+using static BogdanDuben.RobotChallenge.DistanceHelper;
 
-namespace BogdanDuben.RobotChallange {
+namespace BogdanDuben.RobotChallenge
+{
     public class BogdanDubenAlgorithm : IRobotAlgorithm
     {
 
         public RobotCommand DoStep(IList<Robot.Common.Robot> robots, int robotToMoveIndex, Map map)
         {
-            var myRobot = robots[robotToMoveIndex];
-            var newPosition = myRobot.Position;
-            newPosition.X += 1;
-            newPosition.Y += 1;
-            return new MoveCommand() { NewPosition = newPosition };
+            Robot.Common.Robot movingRobot = robots[robotToMoveIndex];
+            if ((movingRobot.Energy > 500) && (robots.Count < map.Stations.Count))
+            {
+                return new CreateNewRobotCommand();
+            }
 
 
-            return null;
+
+            Position stationPosition = FindNearestFreeStation(robots[robotToMoveIndex], map, robots);
+
+            if (stationPosition == null)
+                return null;
+
+            if (stationPosition == movingRobot.Position)
+                return new CollectEnergyCommand();
+            else
+            {
+
+                return new MoveCommand() { NewPosition = stationPosition };
+            }
         }
+
 
 
 
