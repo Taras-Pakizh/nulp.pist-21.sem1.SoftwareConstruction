@@ -11,6 +11,18 @@ namespace BogdanDuben.RobotChallenge
     public class BogdanDubenAlgorithm : IRobotAlgorithm
     {
 
+        public BogdanDubenAlgorithm()
+        {
+            Logger.OnLogRound += OnLogRound;
+        }
+
+        private void OnLogRound(object sender, LogRoundEventArgs e)
+        {
+            RoundCount++;
+        }
+
+        private int RoundCount { get; set; }
+
         public RobotCommand DoStep(IList<Robot.Common.Robot> robots, int robotToMoveIndex, Map map)
         {
             Robot.Common.Robot movingRobot = robots[robotToMoveIndex];
