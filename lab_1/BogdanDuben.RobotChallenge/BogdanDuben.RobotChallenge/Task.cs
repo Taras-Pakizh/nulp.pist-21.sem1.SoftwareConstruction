@@ -67,7 +67,7 @@ namespace BogdanDuben.RobotChallenge
             {
                 robot.addTask(new CreateTask());
                 robot.addTask(new CollectTask());
-                return robot.getTask().proccess(robots, robot, map);
+                return new CollectEnergyCommand();
             }
             var sort = Util.SortStations(map, robots[robot.id].Position);
             foreach (var st in sort)
@@ -81,14 +81,7 @@ namespace BogdanDuben.RobotChallenge
                     robot.addTask(new CollectTask());
                     return new MoveCommand() { NewPosition = st.Position };
                 }
-            }
-            foreach (var st in sort)
-            {
-                if (Util.EnergyToPosition(st.Position, robots[robot.id].Position) > robots[robot.id].Energy)
-                {
-                    continue;
-                }
-                if (Util.EnemysRobotCount(robots, st.Position, robots[robot.id].Owner) != 0)
+                if (Util.EnemysRobotCount(robots, st.Position, robots[robot.id].Owner) < 4 && Util.MyRobotCount(robots, st.Position, robots[robot.id].Owner) == 0)
                 {
                     robot.addTask(new CollectTask());
                     return new MoveCommand() { NewPosition = st.Position };
