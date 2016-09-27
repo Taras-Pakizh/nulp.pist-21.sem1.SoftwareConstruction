@@ -25,30 +25,9 @@ namespace BogdanDuben.RobotChallenge
 
         public RobotCommand DoStep(IList<Robot.Common.Robot> robots, int robotToMoveIndex, Map map)
         {
-            Robot.Common.Robot movingRobot = robots[robotToMoveIndex];
-            if ((movingRobot.Energy > 200) && (robots.Count < 5 * map.Stations.Count))
-                return new CreateNewRobotCommand();
-            Position stationPosition = FindNearestFreeStation(robots[robotToMoveIndex], map, robots);
-            EnergyStation station = null;
-            foreach (var st in map.Stations)
-            {
-                if (st.Position.Equals(stationPosition))
-                {
-                    station = st;
-                }
-            }
-            if (station.Energy < 10)
-            {
-                var m = map;
-                m.Stations.Remove(station);
-                stationPosition = FindNearestFreeStation(robots[robotToMoveIndex], m, robots);
-            }
-            if (stationPosition == null)
-                return null;
-            if (stationPosition == movingRobot.Position)
-                return new CollectEnergyCommand();
-            else
-                return new MoveCommand() { NewPosition = stationPosition };
+            MRobot robot = MRobot.getRobot(robotToMoveIndex);
+            var task = robot.getTask();
+            return task.proccess(robots, robot, map);
         }
 
 
