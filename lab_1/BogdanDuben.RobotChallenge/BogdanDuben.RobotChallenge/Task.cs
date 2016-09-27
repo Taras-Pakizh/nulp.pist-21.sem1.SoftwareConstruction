@@ -72,7 +72,7 @@ namespace BogdanDuben.RobotChallenge
             var sort = Util.SortStations(map, robots[robot.id].Position);
             foreach (var st in sort)
             {
-                if (Util.EnergyToPosition(st.Position, robots[robot.id].Position) > robots[robot.id].Energy - 300)
+                if (Util.EnergyToPosition(st.Position, robots[robot.id].Position) > robots[robot.id].Energy)
                 {
                     continue;
                 }
@@ -84,7 +84,7 @@ namespace BogdanDuben.RobotChallenge
             }
             foreach (var st in sort)
             {
-                if (Util.EnergyToPosition(st.Position, robots[robot.id].Position) > robots[robot.id].Energy - 300)
+                if (Util.EnergyToPosition(st.Position, robots[robot.id].Position) > robots[robot.id].Energy)
                 {
                     continue;
                 }
