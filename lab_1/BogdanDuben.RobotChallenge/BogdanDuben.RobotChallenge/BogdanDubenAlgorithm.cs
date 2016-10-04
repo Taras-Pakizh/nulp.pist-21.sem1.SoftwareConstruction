@@ -11,6 +11,12 @@ namespace BogdanDuben.RobotChallenge
     public class BogdanDubenAlgorithm : IRobotAlgorithm
     {
 
+        //public delegate void ChangedEventHandler(object sender, EventArgs e);
+        //public event ChangedEventHandler Changed;
+        //MyEventArgs : EventArgs;
+        //if (Changed != null) Changed(this, e);
+        //List.Changed += new ChangedEventHandler(ListChanged);
+
         public BogdanDubenAlgorithm()
         {
             Logger.OnLogRound += OnLogRound;
