@@ -1,0 +1,1 @@
+copy /Y C:\MyProject\nulp.pist-21.sem1.SoftwareConstruction\lab_1\BogdanDuben.RobotChallenge\BogdanDuben.RobotChallenge\bin\Debug\BogdanDuben.RobotChallenge.dll C:\MyProject\nulp.pist-21.sem1.SoftwareConstruction\lab_1\RobotChallengeLab\Tournament\AlgorithmDlls\*
