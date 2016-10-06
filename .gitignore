@@ -1,7 +1,8 @@
-lab_1/BogdanDuben.RobotChallenge/.vs/
-lab_1/RobotChallengeLab/
-lab_1/BogdanDuben.RobotChallenge/*/obj/
-lab_1/BogdanDuben.RobotChallenge/*/bin/
-lab_1/BogdanDuben.RobotChallenge/*/Properties/
+**/.vs/
+lab_1/RobotChallengeLab/*
+**/obj/*
+**/bin/*
+**/Properties/*
 *.csproj
 *.sln
+*.config
