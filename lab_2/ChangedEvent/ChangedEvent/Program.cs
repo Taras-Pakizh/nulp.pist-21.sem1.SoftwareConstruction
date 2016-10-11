@@ -13,23 +13,26 @@ namespace ChangedEvent
 
         static void Main(string[] args)
         {
-            switch (new Random().Next(2))
-            {
-                case 0:
-                    Changed += new ChangedEventHandler(m1);
-                    break;
-                case 1:
-                    Changed += new ChangedEventHandler(m2);
-                    break;
-                case 2:
-                    Changed += new ChangedEventHandler(m3);
-                    break;
-                default:
-                    Changed += new ChangedEventHandler(m4);
-                    break;
+            for (var i = 0; i < 10; i++) {
+                Changed = null;
+                switch (new Random().Next(2))
+                {
+                    case 0:
+                        Changed += new ChangedEventHandler(m1);
+                        break;
+                    case 1:
+                        Changed += new ChangedEventHandler(m2);
+                        break;
+                    case 2:
+                        Changed += new ChangedEventHandler(m3);
+                        break;
+                    default:
+                        Changed += new ChangedEventHandler(m4);
+                        break;
+                }
+                Changed(null, new Args());
+                Console.ReadKey();
             }
-            Changed(null, new Args());
-            Console.ReadKey();
         }
 
         private static void m1(object sender, Args args)
