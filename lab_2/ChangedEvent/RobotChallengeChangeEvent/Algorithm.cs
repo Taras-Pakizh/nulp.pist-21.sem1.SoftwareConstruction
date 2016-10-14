@@ -8,6 +8,18 @@ namespace RobotChallengeChangeEvent
     class Algorithm : IRobotAlgorithm
     {
 
+        public Algorithm()
+        {
+            Logger.OnLogRound += OnLogRound;
+        }
+        private void OnLogRound(object sender, LogRoundEventArgs e)
+        {
+            RoundCount++;
+        }
+        private int RoundCount { get; set; }
+
+
+
         public static event ChangedEventHandler Changed;
 
         public RobotCommand DoStep(IList<Robot.Common.Robot> robots, int robotToMoveIndex, Map map)
