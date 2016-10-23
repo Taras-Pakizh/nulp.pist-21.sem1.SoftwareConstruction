@@ -482,12 +482,16 @@ namespace cmdTestQuestions
         {
             var model = new Model3();
 
-            var list = new List<Country3>(model.CountryList).GroupBy(m => m.Id, o => o.City).All(g =>
+            var list = new List<Country3>(model.CountryList).GroupBy(o => o.City);
+            foreach (IGrouping<string, Country3> country in list)
             {
-                new List<Country3>(model.CountryList).ForEach(a => Console.WriteLine(a.Id + " \t" + a.City));
-                return true;
-            });
-
+                Console.WriteLine(country.Key);
+                foreach (var l in country)
+                {
+                    Console.WriteLine(l.Area + " " + l.City + " " + l.HomeAddress + " " + l.Street);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
