@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LINQQuest
 {
-    enum Gender
+    interface Display
     {
-        Male, Female
+
+        void display();
+
     }
 }
