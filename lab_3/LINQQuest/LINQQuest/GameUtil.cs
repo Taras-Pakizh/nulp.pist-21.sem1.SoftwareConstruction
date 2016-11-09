@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,59 @@ namespace LINQQuest
         public static string getMap(this Game game)
         {
             return game.getMap().ToString();
+        }
+
+        public static SortedList<String, MapObject> getMapAsSortedList(this Game game)
+        {
+            var map = game.getMap();
+            var result = new SortedList<String, MapObject>();
+            for (int i = 0; i < map.width; i++)
+            {
+                for (int j = 0; j < map.height; j++)
+                {
+                    result.Add(map.get(i, j).ToString(), map.get(i,j));
+                }
+            }
+            return result;
+        }
+
+        public static Queue<MapObject> getMapAsQueue(this Game game)
+        {
+            var map = game.getMap();
+            var result = new Queue<MapObject>();
+            for (int i = 0; i < map.width; i++)
+            {
+                for (int j = 0; j < map.height; j++)
+                {
+                    result.Enqueue(map.get(i, j));
+                }
+            }
+            return result;
+        }
+
+        public static List<MapObject> getSortedMap(this Game game)
+        {
+            var map = game.getMap();
+            var result = new List<MapObject>();
+            for (int i = 0; i < map.width; i++)
+            {
+                for (int j = 0; j < map.height; j++)
+                {
+                    result.Add(map.get(i, j));
+                }
+            }
+            result.Sort((MapObject a, MapObject b) =>
+            {
+                if (a.ToString().Length > b.ToString().Length)
+                {
+                    return 1;
+                } else if (a.ToString().Length < b.ToString().Length)
+                {
+                    return -1;
+                }
+                return a.ToString()[0] >= b.ToString()[0] ? 1 : -1;
+            });
+            return result;
         }
 
         public static void getMapSize(this Game game, out Double[] size)
