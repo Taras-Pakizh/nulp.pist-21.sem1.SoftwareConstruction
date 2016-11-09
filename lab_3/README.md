@@ -5,4 +5,4 @@ lab_3
 
 [Звіт][1]
 
- [1]: https://docs.google.com/document/d/15tnFBcmtwNd18vzRqEF6d36A5G5hd5Zw7eXdPbruZ4k/edit?usp=sharing
+ [1]: https://docs.google.com/document/d/1PCPa-O0ufHwxpoDqKNsCr0X6P8ji-zzjs5p_T4shtLk/edit?usp=sharing
