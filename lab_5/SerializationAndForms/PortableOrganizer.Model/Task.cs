@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
-namespace Serialization
+namespace PortableOrganizer
 {
+
     //[Serializable]
     [DataContract]
-    public class Project
+    public class Task
     {
-
         [DataMember]
         public string Name { get; set; }
 
@@ -19,7 +19,7 @@ namespace Serialization
         public string Description { get; set; }
 
         [DataMember]
-        public IEnumerable<Task> Tasks { get; set; }   
+        public int Priority { get; set; }
 
     }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Serialization;
+using PortableOrganizer;
 using System.Collections.Generic;
 
 namespace PortableOrganizer.Serialization.Test
