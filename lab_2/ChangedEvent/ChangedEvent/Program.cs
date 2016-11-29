@@ -11,7 +11,7 @@ namespace ChangedEvent
 
         public static event ChangedEventHandler Changed;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             for (var i = 0; i < 10; i++) {
                 Changed = null;
