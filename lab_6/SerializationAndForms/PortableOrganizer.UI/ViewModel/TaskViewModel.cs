@@ -10,7 +10,8 @@ namespace PortableOrganizer.UI.ViewModel
     {
         private string _name;
         public string Name {
-            get {
+            get
+            {
                 return _name;
             }
             set

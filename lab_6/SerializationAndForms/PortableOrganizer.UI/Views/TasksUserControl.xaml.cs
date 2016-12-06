@@ -14,23 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PortableOrganizer.UI
+namespace PortableOrganizer.UI.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для TasksUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TasksUserControl : UserControl
     {
-        public MainWindow()
+        public TasksUserControl()
         {
             InitializeComponent();
-        }
-
-        private void buttonCloseTask_Click(object sender, RoutedEventArgs e)
-        {
-            var task = (TaskViewModel)dataGrid.SelectedItem;
-            if (task == null) return;
-            task.Status = TaskStatus.Closed;
         }
     }
 }
