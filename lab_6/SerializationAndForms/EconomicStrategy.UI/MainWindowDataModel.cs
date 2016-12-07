@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace EconomicStrategy.UI
 {
@@ -15,6 +16,13 @@ namespace EconomicStrategy.UI
     {
 
         public static string DataPath = "economic_strategy.dat";
+
+        public static ICommand saveCommand = new Command(Save);
+
+        private static void Save(object obj)
+        {
+            (obj as MainWindowDataModel).Save();
+        }
 
         public static MainWindowDataModel Load()
         {

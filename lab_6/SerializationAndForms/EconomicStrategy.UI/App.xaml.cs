@@ -1,4 +1,6 @@
 ﻿using EconomicStrategy.Model;
+using EconomicStrategy.UI.ViewModel;
+using EconomicStrategy.UI.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

@@ -15,8 +15,9 @@ using System.Windows.Shapes;
 using EconomicStrategy.Model;
 using System.Windows.Media.Animation;
 using System.Media;
+using EconomicStrategy.UI.ViewModel;
 
-namespace EconomicStrategy.UI
+namespace EconomicStrategy.UI.Views
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
