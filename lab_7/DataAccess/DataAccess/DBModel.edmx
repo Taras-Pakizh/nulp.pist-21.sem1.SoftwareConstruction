@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище db_labsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="registration_date" Type="date" />
+          <Property Name="phone" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id_device" />
+          </Key>
+          <Property Name="id_device" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="description" Type="text" />
+          <Property Name="category" Type="int" />
+          <Property Name="location" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ordr">
+          <Key>
+            <PropertyRef Name="id_ordr" />
+          </Key>
+          <Property Name="id_ordr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" />
+          <Property Name="employee" Type="int" Nullable="false" />
+          <Property Name="delivery" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__order__client__5C57A83E">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="ordr" Type="Self.ordr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="ordr">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище db_labsModelContainer">
+          <EntitySet Name="client" EntityType="Self.client" Schema="labs" store:Type="Tables" />
+          <EntitySet Name="device" EntityType="Self.device" Schema="labs" store:Type="Tables" />
+          <EntitySet Name="ordr" EntityType="Self.ordr" Schema="labs" store:Type="Tables" />
+          <AssociationSet Name="FK__order__client__5C57A83E" Association="Self.FK__order__client__5C57A83E">
+            <End Role="client" EntitySet="client" />
+            <End Role="ordr" EntitySet="ordr" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_labsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="registration_date" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ordr" Relationship="Self.FK__order__client__5C57A83E" FromRole="client" ToRole="ordr" />
+        </EntityType>
+        <EntityType Name="device">
+          <Key>
+            <PropertyRef Name="id_device" />
+          </Key>
+          <Property Name="id_device" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="Int32" />
+          <Property Name="location" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ordr">
+          <Key>
+            <PropertyRef Name="id_ordr" />
+          </Key>
+          <Property Name="id_ordr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="employee" Type="Int32" Nullable="false" />
+          <Property Name="delivery" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client1" Relationship="Self.FK__order__client__5C57A83E" FromRole="ordr" ToRole="client" />
+        </EntityType>
+        <Association Name="FK__order__client__5C57A83E">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="ordr" Type="Self.ordr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="ordr">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_labsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="client" EntityType="Self.client" />
+          <EntitySet Name="device" EntityType="Self.device" />
+          <EntitySet Name="ordr" EntityType="Self.ordr" />
+          <AssociationSet Name="FK__order__client__5C57A83E" Association="Self.FK__order__client__5C57A83E">
+            <End Role="client" EntitySet="client" />
+            <End Role="ordr" EntitySet="ordr" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище db_labsModelContainer" CdmEntityContainer="db_labsEntities">
+          <EntitySetMapping Name="client">
+            <EntityTypeMapping TypeName="db_labsModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="device">
+            <EntityTypeMapping TypeName="db_labsModel.device">
+              <MappingFragment StoreEntitySet="device">
+                <ScalarProperty Name="id_device" ColumnName="id_device" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="location" ColumnName="location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ordr">
+            <EntityTypeMapping TypeName="db_labsModel.ordr">
+              <MappingFragment StoreEntitySet="ordr">
+                <ScalarProperty Name="id_ordr" ColumnName="id_ordr" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="employee" ColumnName="employee" />
+                <ScalarProperty Name="delivery" ColumnName="delivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

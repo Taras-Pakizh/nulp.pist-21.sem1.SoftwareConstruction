@@ -1,0 +1,24 @@
+﻿<Window x:Class="DataAccess.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataAccess"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <DataGrid x:Name="dataGrid" Margin="0,0,180,0" IsReadOnly="False" AutoGenerateColumns="True">
+        </DataGrid>
+        <ListBox x:Name="listBox" HorizontalAlignment="Right" Width="180" Margin="0,22,0,30">
+            <ListBoxItem Content="client"/>
+            <ListBoxItem Content="device"/>
+            <ListBoxItem Content="order"/>
+        </ListBox>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Right" Width="180" Height="22" VerticalAlignment="Top">
+            <ListBoxItem Content="ADO.Net"/>
+            <ListBoxItem Content="LINQ to SQL"/>
+            <ListBoxItem Content="ADO.Net EntityFramework"/>
+        </ComboBox>
+        <Button Content="OK" HorizontalAlignment="Right" Width="180" Height="30" VerticalAlignment="Bottom" Click="Button_Click"/>
+    </Grid>
+</Window>
