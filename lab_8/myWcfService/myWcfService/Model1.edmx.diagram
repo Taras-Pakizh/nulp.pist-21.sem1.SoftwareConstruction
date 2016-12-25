@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d670fa7372a43a2af4ea78c7aaf0c94" Name="Diagram1">
+        <EntityTypeShape EntityType="BookShopModel.Author" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Book" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Category" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Client" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Employee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Error" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.InOrder" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Jenre" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Publisher" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.Shop" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="BookShopModel.FK_Book_Author" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Book_Jenre1" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Book_Publisher" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_InOrder_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Jenre_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Order_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Employee_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Order_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_InOrder_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="BookShopModel.FK_Order_Shop" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

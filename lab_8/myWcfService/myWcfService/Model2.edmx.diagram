@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a17c7b3088f842c6a376beb43d464338" Name="Diagram1">
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.DeliveryKind" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.Department" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.DisplacementsOut" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.PackageType" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.Person" Width="1.5" PointX="8.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.Route" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.Storage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.sysdiagram" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.TariffZone" Width="1.5" PointX="8.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.City" Width="1.5" PointX="8.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.CourierDelivery" Width="1.5" PointX="4.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExpressDeliveryDataBaseModel.Package" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK__Displacem__from___2022C2A6" ManuallyRouted="false" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK__Displacem__to_de__220B0B18" ManuallyRouted="false" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK_Packages_Departments1" ManuallyRouted="false" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK__Displacem__from___1F2E9E6D" ManuallyRouted="false" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK__Displacem__to_st__2116E6DF" ManuallyRouted="false" />
+        <AssociationConnector Association="ExpressDeliveryDataBaseModel.FK_Packages_PackageTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

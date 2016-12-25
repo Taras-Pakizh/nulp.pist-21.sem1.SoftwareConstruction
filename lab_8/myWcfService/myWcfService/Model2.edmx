@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ExpressDeliveryDataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ExpressDeliveryDataBase.dbo.Cities" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ExpressDeliveryDataBase.dbo.CourierDeliveries" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="CourierDeliveries">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="package_id" />
+            <PropertyRef Name="from_department_to_person" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="courier" Type="nvarchar" MaxLength="70" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+          <Property Name="from_department_to_person" Type="bit" Nullable="false" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <EntityType Name="DeliveryKinds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="surcharge" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="adress" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone_number" Type="nchar" MaxLength="14" />
+          <Property Name="city_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DisplacementsOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="route_id" Type="int" Nullable="false" />
+          <Property Name="delivered" Type="bit" />
+          <Property Name="from_storage_id" Type="int" />
+          <Property Name="from_department_id" Type="int" />
+          <Property Name="to_storage_id" Type="int" />
+          <Property Name="to_department_id" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ExpressDeliveryDataBase.dbo.Packages" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="kind_of_delivery_id" />
+            <PropertyRef Name="package_type_id" />
+            <PropertyRef Name="sender_id" />
+            <PropertyRef Name="receiver_id" />
+            <PropertyRef Name="worker" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="payment_cash" />
+            <PropertyRef Name="payment_side" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="from_department_id" Type="int" />
+          <Property Name="to_department_id" Type="int" />
+          <Property Name="volume" Type="float" />
+          <Property Name="weight" Type="float" />
+          <Property Name="status" Type="bit" />
+          <Property Name="kind_of_delivery_id" Type="int" Nullable="false" />
+          <Property Name="package_type_id" Type="int" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="sender_id" Type="int" Nullable="false" />
+          <Property Name="receiver_id" Type="int" Nullable="false" />
+          <Property Name="worker" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="payment_cash" Type="bit" Nullable="false" />
+          <Property Name="payment_side" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="paid" Type="bit" />
+          <Property Name="kind_of_delivery_string" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PackageTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="delivery_charge" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Routes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="car_number" Type="nchar" MaxLength="10" />
+          <Property Name="driver" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Storages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="city_id" Type="int" />
+          <Property Name="adress" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone_number" Type="nchar" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TariffZones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID_city_from" Type="int" Nullable="false" />
+          <Property Name="ID_city_to" Type="int" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Displacem__from___1F2E9E6D">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="from_storage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__from___2022C2A6">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="from_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__to_de__220B0B18">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="to_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__to_st__2116E6DF">
+          <End Role="Storages" Type="Self.Storages" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="to_storage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packages_Departments1">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="from_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packages_PackageTypes">
+          <End Role="PackageTypes" Type="Self.PackageTypes" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="package_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ExpressDeliveryDataBaseModelContainer">
+          <EntitySet Name="DeliveryKinds" EntityType="Self.DeliveryKinds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisplacementsOut" EntityType="Self.DisplacementsOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageTypes" EntityType="Self.PackageTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Storages" EntityType="Self.Storages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TariffZones" EntityType="Self.TariffZones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Cities].[ID] AS [ID], 
+    [Cities].[name] AS [name], 
+    [Cities].[country] AS [country]
+    FROM [dbo].[Cities] AS [Cities]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CourierDeliveries" EntityType="Self.CourierDeliveries" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CourierDeliveries].[ID] AS [ID], 
+    [CourierDeliveries].[courier] AS [courier], 
+    [CourierDeliveries].[package_id] AS [package_id], 
+    [CourierDeliveries].[from_department_to_person] AS [from_department_to_person], 
+    [CourierDeliveries].[date] AS [date]
+    FROM [dbo].[CourierDeliveries] AS [CourierDeliveries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Packages" EntityType="Self.Packages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Packages].[ID] AS [ID], 
+    [Packages].[from_department_id] AS [from_department_id], 
+    [Packages].[to_department_id] AS [to_department_id], 
+    [Packages].[volume] AS [volume], 
+    [Packages].[weight] AS [weight], 
+    [Packages].[status] AS [status], 
+    [Packages].[kind_of_delivery_id] AS [kind_of_delivery_id], 
+    [Packages].[package_type_id] AS [package_type_id], 
+    [Packages].[description] AS [description], 
+    [Packages].[sender_id] AS [sender_id], 
+    [Packages].[receiver_id] AS [receiver_id], 
+    [Packages].[worker] AS [worker], 
+    [Packages].[date] AS [date], 
+    [Packages].[payment_cash] AS [payment_cash], 
+    [Packages].[payment_side] AS [payment_side], 
+    [Packages].[paid] AS [paid], 
+    [Packages].[kind_of_delivery_string] AS [kind_of_delivery_string]
+    FROM [dbo].[Packages] AS [Packages]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Displacem__from___1F2E9E6D" Association="Self.FK__Displacem__from___1F2E9E6D">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__from___2022C2A6" Association="Self.FK__Displacem__from___2022C2A6">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__to_de__220B0B18" Association="Self.FK__Displacem__to_de__220B0B18">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__to_st__2116E6DF" Association="Self.FK__Displacem__to_st__2116E6DF">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packages_Departments1" Association="Self.FK_Packages_Departments1">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packages_PackageTypes" Association="Self.FK_Packages_PackageTypes">
+            <End Role="PackageTypes" EntitySet="PackageTypes" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExpressDeliveryDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DeliveryKind">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="surcharge" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="city_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DisplacementsOuts" Relationship="Self.FK__Displacem__from___2022C2A6" FromRole="Departments" ToRole="DisplacementsOut" />
+          <NavigationProperty Name="DisplacementsOuts1" Relationship="Self.FK__Displacem__to_de__220B0B18" FromRole="Departments" ToRole="DisplacementsOut" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_Packages_Departments1" FromRole="Departments" ToRole="Packages" />
+        </EntityType>
+        <EntityType Name="DisplacementsOut">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="route_id" Type="Int32" Nullable="false" />
+          <Property Name="delivered" Type="Boolean" />
+          <Property Name="from_storage_id" Type="Int32" />
+          <Property Name="from_department_id" Type="Int32" />
+          <Property Name="to_storage_id" Type="Int32" />
+          <Property Name="to_department_id" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Displacem__from___2022C2A6" FromRole="DisplacementsOut" ToRole="Departments" />
+          <NavigationProperty Name="Department1" Relationship="Self.FK__Displacem__to_de__220B0B18" FromRole="DisplacementsOut" ToRole="Departments" />
+          <NavigationProperty Name="Storage" Relationship="Self.FK__Displacem__from___1F2E9E6D" FromRole="DisplacementsOut" ToRole="Storages" />
+          <NavigationProperty Name="Storage1" Relationship="Self.FK__Displacem__to_st__2116E6DF" FromRole="DisplacementsOut" ToRole="Storages" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="delivery_charge" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_Packages_PackageTypes" FromRole="PackageTypes" ToRole="Packages" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="phone_number" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="car_number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="driver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Storage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="city_id" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DisplacementsOuts" Relationship="Self.FK__Displacem__from___1F2E9E6D" FromRole="Storages" ToRole="DisplacementsOut" />
+          <NavigationProperty Name="DisplacementsOuts1" Relationship="Self.FK__Displacem__to_st__2116E6DF" FromRole="Storages" ToRole="DisplacementsOut" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TariffZone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID_city_from" Type="Int32" Nullable="false" />
+          <Property Name="ID_city_to" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CourierDelivery">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="package_id" />
+            <PropertyRef Name="from_department_to_person" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="courier" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="from_department_to_person" Type="Boolean" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="kind_of_delivery_id" />
+            <PropertyRef Name="package_type_id" />
+            <PropertyRef Name="sender_id" />
+            <PropertyRef Name="receiver_id" />
+            <PropertyRef Name="worker" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="payment_cash" />
+            <PropertyRef Name="payment_side" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="from_department_id" Type="Int32" />
+          <Property Name="to_department_id" Type="Int32" />
+          <Property Name="volume" Type="Double" />
+          <Property Name="weight" Type="Double" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="kind_of_delivery_id" Type="Int32" Nullable="false" />
+          <Property Name="package_type_id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sender_id" Type="Int32" Nullable="false" />
+          <Property Name="receiver_id" Type="Int32" Nullable="false" />
+          <Property Name="worker" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="payment_cash" Type="Boolean" Nullable="false" />
+          <Property Name="payment_side" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="paid" Type="Boolean" />
+          <Property Name="kind_of_delivery_string" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Packages_Departments1" FromRole="Packages" ToRole="Departments" />
+          <NavigationProperty Name="PackageType" Relationship="Self.FK_Packages_PackageTypes" FromRole="Packages" ToRole="PackageTypes" />
+        </EntityType>
+        <Association Name="FK__Displacem__from___2022C2A6">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="from_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__to_de__220B0B18">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="to_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packages_Departments1">
+          <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="from_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__from___1F2E9E6D">
+          <End Role="Storages" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="from_storage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Displacem__to_st__2116E6DF">
+          <End Role="Storages" Type="Self.Storage" Multiplicity="0..1" />
+          <End Role="DisplacementsOut" Type="Self.DisplacementsOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Storages">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DisplacementsOut">
+              <PropertyRef Name="to_storage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packages_PackageTypes">
+          <End Role="PackageTypes" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="package_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpressDeliveryDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DeliveryKinds" EntityType="Self.DeliveryKind" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="DisplacementsOuts" EntityType="Self.DisplacementsOut" />
+          <EntitySet Name="PackageTypes" EntityType="Self.PackageType" />
+          <EntitySet Name="Persons" EntityType="Self.Person" />
+          <EntitySet Name="Routes" EntityType="Self.Route" />
+          <EntitySet Name="Storages" EntityType="Self.Storage" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TariffZones" EntityType="Self.TariffZone" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="CourierDeliveries" EntityType="Self.CourierDelivery" />
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <AssociationSet Name="FK__Displacem__from___2022C2A6" Association="Self.FK__Displacem__from___2022C2A6">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__to_de__220B0B18" Association="Self.FK__Displacem__to_de__220B0B18">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packages_Departments1" Association="Self.FK_Packages_Departments1">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__from___1F2E9E6D" Association="Self.FK__Displacem__from___1F2E9E6D">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Displacem__to_st__2116E6DF" Association="Self.FK__Displacem__to_st__2116E6DF">
+            <End Role="Storages" EntitySet="Storages" />
+            <End Role="DisplacementsOut" EntitySet="DisplacementsOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packages_PackageTypes" Association="Self.FK_Packages_PackageTypes">
+            <End Role="PackageTypes" EntitySet="PackageTypes" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ExpressDeliveryDataBaseModelContainer" CdmEntityContainer="ExpressDeliveryDataBaseEntities">
+          <EntitySetMapping Name="DeliveryKinds">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.DeliveryKind">
+              <MappingFragment StoreEntitySet="DeliveryKinds">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surcharge" ColumnName="surcharge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisplacementsOuts">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.DisplacementsOut">
+              <MappingFragment StoreEntitySet="DisplacementsOut">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+                <ScalarProperty Name="delivered" ColumnName="delivered" />
+                <ScalarProperty Name="from_storage_id" ColumnName="from_storage_id" />
+                <ScalarProperty Name="from_department_id" ColumnName="from_department_id" />
+                <ScalarProperty Name="to_storage_id" ColumnName="to_storage_id" />
+                <ScalarProperty Name="to_department_id" ColumnName="to_department_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageTypes">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.PackageType">
+              <MappingFragment StoreEntitySet="PackageTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="delivery_charge" ColumnName="delivery_charge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.Person">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.Route">
+              <MappingFragment StoreEntitySet="Routes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="car_number" ColumnName="car_number" />
+                <ScalarProperty Name="driver" ColumnName="driver" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Storages">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.Storage">
+              <MappingFragment StoreEntitySet="Storages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TariffZones">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.TariffZone">
+              <MappingFragment StoreEntitySet="TariffZones">
+                <ScalarProperty Name="ID_city_from" ColumnName="ID_city_from" />
+                <ScalarProperty Name="ID_city_to" ColumnName="ID_city_to" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourierDeliveries">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.CourierDelivery">
+              <MappingFragment StoreEntitySet="CourierDeliveries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="courier" ColumnName="courier" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+                <ScalarProperty Name="from_department_to_person" ColumnName="from_department_to_person" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="ExpressDeliveryDataBaseModel.Package">
+              <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="from_department_id" ColumnName="from_department_id" />
+                <ScalarProperty Name="to_department_id" ColumnName="to_department_id" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="kind_of_delivery_id" ColumnName="kind_of_delivery_id" />
+                <ScalarProperty Name="package_type_id" ColumnName="package_type_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="sender_id" ColumnName="sender_id" />
+                <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+                <ScalarProperty Name="worker" ColumnName="worker" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="payment_cash" ColumnName="payment_cash" />
+                <ScalarProperty Name="payment_side" ColumnName="payment_side" />
+                <ScalarProperty Name="paid" ColumnName="paid" />
+                <ScalarProperty Name="kind_of_delivery_string" ColumnName="kind_of_delivery_string" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
