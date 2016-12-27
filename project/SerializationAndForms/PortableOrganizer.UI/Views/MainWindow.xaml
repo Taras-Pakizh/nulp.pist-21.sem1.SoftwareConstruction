@@ -1,0 +1,35 @@
+﻿<Window xmlns:Views="clr-namespace:PortableOrganizer.UI.Views"  x:Class="PortableOrganizer.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PortableOrganizer.UI"
+        xmlns:Converter="clr-namespace:PortableOrganizer.UI.Converter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Converter:ControlVisibility x:Key="my:ControlVisibility"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <Button Margin="10" Command="{Binding SetControlVisibility}" CommandParameter="Projects">
+                <Image Source="..\Images\Buttons\projects.png" Width="100" Height="100"/>
+            </Button>
+            <Button Margin="10" Command="{Binding SetControlVisibility}" CommandParameter="Tasks">
+                <Image Source="..\Images\Buttons\tasks.png" Width="100" Height="100"/>
+            </Button>
+            <Button Margin="10" Command="{Binding SetControlVisibility}" CommandParameter="Events">
+                <Image Source="..\Images\Buttons\events.png" Width="100" Height="100"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Views:EventsUserControl Visibility="{Binding Path=VisibleControl, Converter={StaticResource my:ControlVisibility}, ConverterParameter=Events}"/>
+            <Views:ProjectsUserControl Visibility="{Binding Path=VisibleControl, Converter={StaticResource my:ControlVisibility}, ConverterParameter=Projects}"/>
+            <Views:TasksUserControl Visibility="{Binding Path=VisibleControl, Converter={StaticResource my:ControlVisibility}, ConverterParameter=Tasks}"/>
+        </StackPanel>
+    </Grid>
+</Window>

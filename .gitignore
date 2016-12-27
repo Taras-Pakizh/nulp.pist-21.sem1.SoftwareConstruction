@@ -18,3 +18,5 @@ lab_7/DataAccess/packages/
 *.suo
 lab_8/myWcfService/packages/
 *.user
+project/SerializationAndForms/packages/
+project/SerializationAndForms/.idea/
