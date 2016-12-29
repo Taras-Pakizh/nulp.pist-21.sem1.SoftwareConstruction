@@ -39,7 +39,7 @@ namespace EconomicStrategy.UI.Views
             addStoryBoard();
             mediaPlayer = new MediaPlayer();
             mediaPlayer.Open(new Uri(@"C:\Files\Musics\Mono\01 - Studio Albums\2001 - Under The Pipal Tree [Tzadik, TZ 7237]\01. Karelia (Opus 2).mp3"));
-            
+            MessageBox.Show("Для того щоб виграти, необхідно за 500 ходів набрати 1 000 000 золота", "Правила гри", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public MainWindowDataModel getModel()
@@ -152,6 +152,7 @@ namespace EconomicStrategy.UI.Views
             drawMap();
             generateResources();
             generateBuilds();
+            MessageBox.Show("Для того щоб виграти, необхідно за 500 ходів набрати 1 000 000 золота", "Правила гри", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void saveButton_MouseLeave(object sender, MouseEventArgs e)
